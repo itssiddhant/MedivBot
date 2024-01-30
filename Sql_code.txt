@@ -1,0 +1,42 @@
+create database csaht;
+
+use csaht;
+
+
+CREATE TABLE patients (
+  id INT NOT NULL AUTO_INCREMENT,
+  name varchar(100) NOT NULL,
+  date_of_birth varchar(25) NOT NULL,
+  blood_pressure varchar(25),
+  ct_scan VARCHAR(255),
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE lab_results (
+  id INT NOT NULL AUTO_INCREMENT,
+  patient_id INT,
+  result VARCHAR(255),
+  date DATE,
+  PRIMARY KEY (id),
+  FOREIGN KEY (patient_id) REFERENCES patients(id)
+);
+
+CREATE TABLE medications (
+  id INT NOT NULL AUTO_INCREMENT,
+  patient_id INT ,
+  medication VARCHAR(255),
+  dosage_instructions VARCHAR(255),
+  PRIMARY KEY (id),
+  FOREIGN KEY (patient_id) REFERENCES patients(id)
+);
+
+CREATE TABLE notes (
+  id INT NOT NULL AUTO_INCREMENT,
+  patient_id INT,
+  note VARCHAR(255),
+  PRIMARY KEY (id),
+  FOREIGN KEY (patient_id) REFERENCES patients(id)
+);
+
+INSERT INTO patients (id, name, date_of_birth, blood_pressure, ct_scan) 
+VALUES (1, 'Jatin', '2001-02-01', '120/80', 'not scheduled');
